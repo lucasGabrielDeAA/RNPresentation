@@ -1,18 +1,36 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, Text, PermissionsAndroid } from 'react-native'
+
+import { torchlight } from 'src/utils'
 
 import { Container, Label, Button, ButtonLabel } from './styles'
 
 export default function Home() {
+  const [onoffTorch, setonoffTorch] = useState(false)
+  const [hasFlashLight, setHasFlashLight] = useState(true)
+
+  const handleTorchLight = async () => {
+    await torchlight.switchTorch(!onoffTorch)
+    setonoffTorch(!onoffTorch)
+  }
+
+  useEffect(() => {
+    const checkFlashLight = async () => {
+      const hasFlashLight = await torchlight.hasFlashLight()
+
+      console.log(`Has torch light ${hasFlashLight}`)
+    }
+
+    checkFlashLight()
+  }, [])
 
   return (
-    <Container>
-      <Label>Hello everyone!</Label>
+    <Container dark={onoffTorch}>
+      <Label dark={onoffTorch}>Torch</Label>
 
-      <Button onPress={() => {}}>
-        <ButtonLabel>Click me</ButtonLabel>
+      <Button dark={onoffTorch} onPress={() => handleTorchLight()}>
+        <ButtonLabel dark={onoffTorch}>{onoffTorch ? 'Turn off' : 'Light up'}</ButtonLabel>
       </Button>
     </Container>
   )
-
 }
