@@ -16,7 +16,6 @@ public class RCTTorchModule extends ReactContextBaseJavaModule {
   private Boolean isTorchOn = false;
   private Camera camera;
 
-  private static final String TORCH_LIGHT_ERROR = "TORCH_LIGHT_ERROR";
   private static final String HAS_FLASH_LIGHT_ERROR = "HAS_FLASH_LIGHT_ERROR";
 
   public RCTTorchModule(ReactApplicationContext reactContext) {

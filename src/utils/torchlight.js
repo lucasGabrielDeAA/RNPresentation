@@ -1,4 +1,4 @@
-import { NativeModules, PermissionsAndroid } from 'react-native'
+import { NativeModules } from 'react-native'
 
 const { TorchLight } = NativeModules
 

@@ -41,7 +41,7 @@ export default function Home() {
         barStyle={onOffTorch ? 'light-content' : 'dark-content'}
       />
 
-      <Label dark={onOffTorch}>Torch</Label>
+      <Label dark={onOffTorch}>{hasFlashLight ? 'Flash light available' : 'No flash light'}</Label>
 
       <Button dark={onOffTorch} onPress={() => handleTorchLight()}>
         <ButtonLabel dark={onOffTorch}>{onOffTorch ? 'Turn off' : 'Light up'}</ButtonLabel>
