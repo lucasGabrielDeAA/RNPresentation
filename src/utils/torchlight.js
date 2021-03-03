@@ -7,7 +7,7 @@ export default {
     TorchLight.switchTorch(onoffTorch)
   },
 
-  async hasFlashLight() {
-    await TorchLight.hasFlashLight()
+  async hasFlashLight(error, response) {
+    await TorchLight.hasFlashLight(error, response)
   }
 }

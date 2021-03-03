@@ -7,20 +7,21 @@ import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CameraCharacteristics;
 import android.os.Build;
 
-import androidx.annotation.RequiresApi;
-
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Promise;
-
-import java.util.Map;
-import java.util.HashMap;
+import com.facebook.react.bridge.WritableMap;
 
 public class RCTTorchModule extends ReactContextBaseJavaModule {
   private final ReactApplicationContext reactContext;
   private Boolean isTorchOn = false;
   private Camera camera;
+
+  private static final String TORCH_LIGHT_ERROR = "TORCH_LIGHT_ERROR";
+
   public RCTTorchModule(ReactApplicationContext reactContext) {
     super(reactContext);
 
@@ -64,23 +65,17 @@ public class RCTTorchModule extends ReactContextBaseJavaModule {
     }
   }
 
-  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   @ReactMethod
-  public void hasFlashLight(Promise promise) {
+  public void hasFlashLight(Callback errorCallback, Callback successCallback) {
     try {
-      // Checking if device has flash on it's camera
-      Map<String, Boolean> flashInfo = new HashMap<String, Boolean>();
-      CameraManager cameraManager = (CameraManager) this.reactContext.getSystemService(Context.CAMERA_SERVICE);
+      WritableMap map = Arguments.createMap();
+      Boolean isFlashAvailable = this.reactContext.getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
 
-      for (String id : cameraManager.getCameraIdList()) {
-        Integer facing = cameraManager.getCameraCharacteristics(id).get(CameraCharacteristics.LENS_FACING);
-        String camera = facing == CameraCharacteristics.LENS_FACING_FRONT ? "Front" : "Back";
-        flashInfo.put(camera, cameraManager.getCameraCharacteristics(id).get(CameraCharacteristics.FLASH_INFO_AVAILABLE));
-      }
+      map.putBoolean("isFlashAvailable", isFlashAvailable);
 
-      promise.resolve(flashInfo);
+      successCallback.invoke(isFlashAvailable);
     } catch (Exception e) {
-      promise.reject("TorchLightError", e);
+      errorCallback.invoke(e);
     }
   }
 }

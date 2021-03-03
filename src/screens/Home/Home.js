@@ -16,9 +16,12 @@ export default function Home() {
 
   useEffect(() => {
     const checkFlashLight = async () => {
-      const hasFlashLight = await torchlight.hasFlashLight()
-
-      console.log(`Has torch light ${hasFlashLight}`)
+      torchlight.hasFlashLight(
+        error => console.log(`Error found ${error}`),
+        isFlashAvailable => {
+          console.log(`Has flash light ${isFlashAvailable}`)
+        }
+      )
     }
 
     checkFlashLight()
