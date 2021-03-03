@@ -6,14 +6,14 @@ import { torchlight } from 'src/utils'
 import { Container, Label, Button, ButtonLabel } from './styles'
 
 export default function Home() {
-  const [onoffTorch, setonoffTorch] = useState(false)
+  const [onOffTorch, setOnOffTorch] = useState(false)
   const [hasFlashLight, setHasFlashLight] = useState(false)
 
   const handleTorchLight = async () => {
     try {
       if (hasFlashLight) {
-        await torchlight.switchTorch(!onoffTorch)
-        setonoffTorch(!onoffTorch)
+        await torchlight.switchTorch(!onOffTorch)
+        setOnOffTorch(!onOffTorch)
       }
     } catch (error) {
       console.log(`Error ${error}`)
@@ -35,16 +35,16 @@ export default function Home() {
   }, [])
 
   return (
-    <Container dark={onoffTorch}>
+    <Container dark={onOffTorch}>
       <StatusBar
-        backgroundColor={onoffTorch ? '#000' : '#fff'}
-        barStyle={onoffTorch ? 'light-content' : 'dark-content'}
+        backgroundColor={onOffTorch ? '#000' : '#fff'}
+        barStyle={onOffTorch ? 'light-content' : 'dark-content'}
       />
 
-      <Label dark={onoffTorch}>Torch</Label>
+      <Label dark={onOffTorch}>Torch</Label>
 
-      <Button dark={onoffTorch} onPress={() => handleTorchLight()}>
-        <ButtonLabel dark={onoffTorch}>{onoffTorch ? 'Turn off' : 'Light up'}</ButtonLabel>
+      <Button dark={onOffTorch} onPress={() => handleTorchLight()}>
+        <ButtonLabel dark={onOffTorch}>{onOffTorch ? 'Turn off' : 'Light up'}</ButtonLabel>
       </Button>
     </Container>
   )

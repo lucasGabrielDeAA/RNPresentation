@@ -17,6 +17,7 @@ public class RCTTorchModule extends ReactContextBaseJavaModule {
   private Camera camera;
 
   private static final String TORCH_LIGHT_ERROR = "TORCH_LIGHT_ERROR";
+  private static final String HAS_FLASH_LIGHT_ERROR = "HAS_FLASH_LIGHT_ERROR";
 
   public RCTTorchModule(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -30,34 +31,34 @@ public class RCTTorchModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void switchTorch(Boolean onoffTorch) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      CameraManager cameraManager = (CameraManager) this.reactContext.getSystemService(Context.CAMERA_SERVICE);
+  public void switchTorch(Boolean onOffTorch) {
+    try {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        CameraManager cameraManager = (CameraManager) this.reactContext.getSystemService(Context.CAMERA_SERVICE);
 
-      try {
-        cameraManager.setTorchMode(cameraManager.getCameraIdList()[0], onoffTorch);
-      } catch (Exception e ) {
-        e.printStackTrace();
-      }
-    } else {
-      Camera.Parameters cameraParams;
-
-      if (onoffTorch && !isTorchOn) {
-        camera = Camera.open();
-        cameraParams = camera.getParameters();
-        cameraParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-
-        camera.setParameters(cameraParams);
+        cameraManager.setTorchMode(cameraManager.getCameraIdList()[0], onOffTorch);
       } else {
-        cameraParams = camera.getParameters();
-        cameraParams.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+        Camera.Parameters cameraParams;
 
-        camera.setParameters(cameraParams);
-        camera.stopPreview();
-        camera.release();
+        if (!isTorchOn) {
+          camera = Camera.open();
+          cameraParams = camera.getParameters();
+          cameraParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+
+          camera.setParameters(cameraParams);
+        } else {
+          cameraParams = camera.getParameters();
+          cameraParams.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+
+          camera.setParameters(cameraParams);
+          camera.stopPreview();
+          camera.release();
+        }
+
+        isTorchOn = onOffTorch;
       }
-
-      isTorchOn = onoffTorch;
+    } catch (Exception e ) {
+      e.printStackTrace();
     }
   }
 
@@ -68,7 +69,7 @@ public class RCTTorchModule extends ReactContextBaseJavaModule {
 
       promise.resolve(isFlashAvailable);
     } catch (Exception e) {
-      promise.reject(TORCH_LIGHT_ERROR, e);
+      promise.reject(HAS_FLASH_LIGHT_ERROR, e);
     }
   }
 }
