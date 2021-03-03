@@ -4,16 +4,12 @@ import android.content.pm.PackageManager;
 import android.content.Context;
 import android.hardware.Camera;
 import android.hardware.camera2.CameraManager;
-import android.hardware.camera2.CameraCharacteristics;
 import android.os.Build;
 
-import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Promise;
-import com.facebook.react.bridge.WritableMap;
 
 public class RCTTorchModule extends ReactContextBaseJavaModule {
   private final ReactApplicationContext reactContext;
@@ -66,16 +62,13 @@ public class RCTTorchModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void hasFlashLight(Callback errorCallback, Callback successCallback) {
+  public void hasFlashLight(Promise promise) {
     try {
-      WritableMap map = Arguments.createMap();
       Boolean isFlashAvailable = this.reactContext.getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
 
-      map.putBoolean("isFlashAvailable", isFlashAvailable);
-
-      successCallback.invoke(isFlashAvailable);
+      promise.resolve(isFlashAvailable);
     } catch (Exception e) {
-      errorCallback.invoke(e);
+      promise.reject(TORCH_LIGHT_ERROR, e);
     }
   }
 }
