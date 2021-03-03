@@ -2,18 +2,18 @@ import styled from 'styled-components'
 
 export const Container = styled.View`
   align-items: center;
-  background-color: #fff;
+  background-color: ${({ dark }) => (dark ? '#000' : '#fff')};
   flex: 1;
   justify-content: center;
 `
 
 export const Label = styled.Text`
-  color: #000;
+  color: ${({ dark }) => (dark ? '#fff' : '#000')};
   font-size: 16px;
 `
 export const Button = styled.TouchableOpacity`
   align-items: center;
-  background-color: #000;
+  background-color: ${({ dark }) => (dark ? '#fff' : '#000')};
   border-radius: 5px;
   elevation: 5;
   justify-content: center;
@@ -24,6 +24,6 @@ export const Button = styled.TouchableOpacity`
 `
 
 export const ButtonLabel = styled.Text`
-  color: #fff;
+  color: ${({ dark }) => (dark ? '#000' : '#fff')};
   font-size: 16px;
 `
