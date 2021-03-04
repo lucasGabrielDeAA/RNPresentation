@@ -11,10 +11,8 @@ export default function Home() {
 
   const handleTorchLight = async () => {
     try {
-      if (hasFlashLight) {
-        await torchlight.switchTorch(!onOffTorch)
-        setOnOffTorch(!onOffTorch)
-      }
+      await torchlight.switchTorch(!onOffTorch)
+      setOnOffTorch(!onOffTorch)
     } catch (error) {
       console.log(`Error ${error}`)
     }
@@ -41,9 +39,11 @@ export default function Home() {
         barStyle={onOffTorch ? 'light-content' : 'dark-content'}
       />
 
-      <Label dark={onOffTorch}>{hasFlashLight ? 'Flash light available' : 'No flash light'}</Label>
+      <Label dark={onOffTorch}>
+        {hasFlashLight ? 'Flash light available' : 'No flash light available'}
+      </Label>
 
-      <Button dark={onOffTorch} onPress={() => handleTorchLight()}>
+      <Button disabled={!hasFlashLight} dark={onOffTorch} onPress={() => handleTorchLight()}>
         <ButtonLabel dark={onOffTorch}>{onOffTorch ? 'Turn off' : 'Light up'}</ButtonLabel>
       </Button>
     </Container>

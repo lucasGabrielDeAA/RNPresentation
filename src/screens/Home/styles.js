@@ -9,15 +9,15 @@ export const Container = styled.View`
 
 export const Label = styled.Text`
   color: ${({ dark }) => (dark ? '#fff' : '#000')};
-  font-size: 16px;
+  font-size: 20px;
 `
 export const Button = styled.TouchableOpacity`
   align-items: center;
-  background-color: ${({ dark }) => (dark ? '#fff' : '#000')};
+  background-color: ${({ dark, disabled }) => (disabled ? '#999' : dark ? '#fff' : '#000')};
   border-radius: 5px;
   elevation: 5;
   justify-content: center;
-  margin: 16px;
+  margin: 32px;
   padding: 4px 8px;
   shadow-offset: { height: 2px, width: 0 };
   shadow-opacity: 0.2;
