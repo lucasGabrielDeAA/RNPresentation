@@ -32,29 +32,33 @@ public class RCTTorchModule extends ReactContextBaseJavaModule {
   @ReactMethod
   public void switchTorch(Boolean onOffTorch) {
     try {
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        CameraManager cameraManager = (CameraManager) this.reactContext.getSystemService(Context.CAMERA_SERVICE);
+      Boolean isFlashAvailable = this.reactContext.getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
 
-        cameraManager.setTorchMode(cameraManager.getCameraIdList()[0], onOffTorch);
-      } else {
-        Camera.Parameters cameraParams;
+      if (isFlashAvailable) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+          CameraManager cameraManager = (CameraManager) this.reactContext.getSystemService(Context.CAMERA_SERVICE);
 
-        if (!isTorchOn) {
-          camera = Camera.open();
-          cameraParams = camera.getParameters();
-          cameraParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-
-          camera.setParameters(cameraParams);
+          cameraManager.setTorchMode(cameraManager.getCameraIdList()[0], onOffTorch);
         } else {
-          cameraParams = camera.getParameters();
-          cameraParams.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+          Camera.Parameters cameraParams;
 
-          camera.setParameters(cameraParams);
-          camera.stopPreview();
-          camera.release();
+          if (!isTorchOn) {
+            camera = Camera.open();
+            cameraParams = camera.getParameters();
+            cameraParams.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+
+            camera.setParameters(cameraParams);
+          } else {
+            cameraParams = camera.getParameters();
+            cameraParams.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+
+            camera.setParameters(cameraParams);
+            camera.stopPreview();
+            camera.release();
+          }
+
+          isTorchOn = onOffTorch;
         }
-
-        isTorchOn = onOffTorch;
       }
     } catch (Exception e ) {
       e.printStackTrace();

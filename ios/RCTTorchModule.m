@@ -30,8 +30,7 @@ RCT_EXPORT_METHOD(switchTorch: (BOOL *) onOffTorch) {
     }
 }
 
-RCT_EXPORT_METHOD(hasFlashLight: resolver:(RCTPromiseResolveBlock)resolve
-                                  rejecter:(RCTPromiseRejectBlock)reject) {
+RCT_EXPORT_METHOD(hasFlashLight:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
     @try {
         BOOL isFlashAvailable = false;
 
@@ -44,7 +43,8 @@ RCT_EXPORT_METHOD(hasFlashLight: resolver:(RCTPromiseResolveBlock)resolve
                 isFlashAvailable = false;
             }
         }
-        resolve(@[@(isFlashAvailable)]);
+      
+      resolve([NSNumber numberWithBool:isFlashAvailable]);
     } @catch (NSException *exception) {
         reject(@"HAS_FLASH_LIGHT_ERROR", @"", nil);
     }
