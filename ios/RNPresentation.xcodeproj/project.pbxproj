@@ -16,6 +16,8 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* RNPresentationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RNPresentationTests.m */; };
+		64A42F7625EF2FA3009826BE /* RCTTorchModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 64A42F7525EF2FA3009826BE /* RCTTorchModule.m */; };
+		64A42F7725EF2FA3009826BE /* RCTTorchModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 64A42F7525EF2FA3009826BE /* RCTTorchModule.m */; };
 		68E6EB606BA33774102C22F1 /* libPods-RNPresentation-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD6AE9698A0A3BBCF2F7E382 /* libPods-RNPresentation-tvOS.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		AA4E6C61C5EA389E188C8DDF /* libPods-RNPresentation-RNPresentationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC98C84BFC5DA8F0FF47C6BE /* libPods-RNPresentation-RNPresentationTests.a */; };
@@ -57,6 +59,8 @@
 		468251E6B62CF0D3B2EABFC6 /* Pods-RNPresentation-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNPresentation-tvOS.release.xcconfig"; path = "Target Support Files/Pods-RNPresentation-tvOS/Pods-RNPresentation-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		4765A6181F41A9F6BB3B00F3 /* Pods-RNPresentation-RNPresentationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNPresentation-RNPresentationTests.release.xcconfig"; path = "Target Support Files/Pods-RNPresentation-RNPresentationTests/Pods-RNPresentation-RNPresentationTests.release.xcconfig"; sourceTree = "<group>"; };
 		4BCADF0F27ED5BA71CADC7AC /* Pods-RNPresentation-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNPresentation-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-RNPresentation-tvOSTests/Pods-RNPresentation-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		64A42F7425EF2F83009826BE /* RCTTorchModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTTorchModule.h; sourceTree = "<group>"; };
+		64A42F7525EF2FA3009826BE /* RCTTorchModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTTorchModule.m; sourceTree = "<group>"; };
 		66F931FDA813FE90E5243C72 /* Pods-RNPresentation-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNPresentation-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-RNPresentation-tvOS/Pods-RNPresentation-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = RNPresentation/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E16176425FBE7A58CAEC1DC /* libPods-RNPresentation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNPresentation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,7 +138,6 @@
 				F2C5556290FE5AE246AF70C0 /* Pods-RNPresentation-tvOSTests.debug.xcconfig */,
 				4BCADF0F27ED5BA71CADC7AC /* Pods-RNPresentation-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -175,6 +178,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				64A42F7525EF2FA3009826BE /* RCTTorchModule.m */,
+				64A42F7425EF2F83009826BE /* RCTTorchModule.h */,
 				13B07FAE1A68108700A75B9A /* RNPresentation */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* RNPresentationTests */,
@@ -560,6 +565,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64A42F7725EF2FA3009826BE /* RCTTorchModule.m in Sources */,
 				00E356F31AD99517003FC87E /* RNPresentationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -568,6 +574,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64A42F7625EF2FA3009826BE /* RCTTorchModule.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
