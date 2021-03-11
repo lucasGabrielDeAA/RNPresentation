@@ -9,9 +9,9 @@ export default function Home() {
   const [onOffTorch, setOnOffTorch] = useState(false)
   const [hasFlashLight, setHasFlashLight] = useState(false)
 
-  const handleTorchLight = async () => {
+  const handleTorchLight = () => {
     try {
-      await torchlight.switchTorch(!onOffTorch)
+      torchlight.switchTorch(!onOffTorch)
       setOnOffTorch(!onOffTorch)
     } catch (error) {
       console.log(`Error ${error}`)

@@ -12,7 +12,7 @@
 
 
 // NativeModules bridge name, the same approach used on Java, with the getName method.
-// The main difeerence between this both methods is the non-literal string usage here in obj-c code, like "TorchLight"
+// The main difference between this both methods is the non-literal string usage here in obj-c code, like "TorchLight"
 RCT_EXPORT_MODULE(TorchLight)
 
 // Methods to be used on JS code level, need this signature on obj-C code level, the same approach when we use @ReactMethod on Java code
