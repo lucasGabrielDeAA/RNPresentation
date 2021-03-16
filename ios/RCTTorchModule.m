@@ -17,7 +17,9 @@ RCT_EXPORT_MODULE(TorchLight)
 
 // Methods to be used on JS code level, need this signature on obj-C code level, the same approach when we use @ReactMethod on Java code
 RCT_EXPORT_METHOD(switchTorch: (BOOL *) onOffTorch) {
+  // Checking if the device has a camera device
     if ([AVCaptureDevice class]) {
+      // Checking the flash
         AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
 
         if ([device hasTorch]) {

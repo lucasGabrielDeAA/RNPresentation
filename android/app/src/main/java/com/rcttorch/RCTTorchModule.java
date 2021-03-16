@@ -11,7 +11,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Promise;
 
-// This file extends the ReactContextBaseJavaModule, which means that aour code will be recongnized as React code on JS code level
+// This file extends the ReactContextBaseJavaModule, which means that our code will be recongnized as React module code on JS code level
 public class RCTTorchModule extends ReactContextBaseJavaModule {
   private final ReactApplicationContext reactContext;
   private Boolean isTorchOn = false;
@@ -31,17 +31,20 @@ public class RCTTorchModule extends ReactContextBaseJavaModule {
     return "TorchLight";
   }
 
-  // Ever method provided from our bridge to be accepted on JS code level need this anotation ahead, to tell that is a React Method properly
+  // Ever method provided from our bridge to be accepted on JS code level need this annotation ahead, to tell that is a React Method properly
   @ReactMethod
   public void switchTorch(Boolean onOffTorch) {
     try {
+      // Checking if the device has a flash on it's camera.
       Boolean isFlashAvailable = this.reactContext.getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
 
       if (isFlashAvailable) {
+        // For new Android builds
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
           CameraManager cameraManager = (CameraManager) this.reactContext.getSystemService(Context.CAMERA_SERVICE);
 
           cameraManager.setTorchMode(cameraManager.getCameraIdList()[0], onOffTorch);
+        // Old Android builds
         } else {
           Camera.Parameters cameraParams;
 
@@ -68,6 +71,8 @@ public class RCTTorchModule extends ReactContextBaseJavaModule {
     }
   }
 
+  // This method receive a promise's object as parameter, because in here we are going to send the response to JS level using a
+  // promise async/await
   @ReactMethod
   public void hasFlashLight(Promise promise) {
     try {
