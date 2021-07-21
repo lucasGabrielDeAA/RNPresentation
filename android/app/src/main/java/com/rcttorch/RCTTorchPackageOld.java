@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 // This file implements the ReactPackage interface, which is necessary to add our bridge module as a React Package to NativeModules on JS code
-public class RCTTorchPackage implements ReactPackage {
+public class RCTTorchPackageOld implements ReactPackage {
 
   @Override
   public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {

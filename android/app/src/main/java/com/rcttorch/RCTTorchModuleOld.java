@@ -12,14 +12,14 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Promise;
 
 // This file extends the ReactContextBaseJavaModule, which means that our code will be recongnized as React module code on JS code level
-public class RCTTorchModule extends ReactContextBaseJavaModule {
+public class RCTTorchModuleOld extends ReactContextBaseJavaModule {
   private final ReactApplicationContext reactContext;
   private Boolean isTorchOn = false;
   private Camera camera;
 
   private static final String HAS_FLASH_LIGHT_ERROR = "HAS_FLASH_LIGHT_ERROR";
 
-  public RCTTorchModule(ReactApplicationContext reactContext) {
+  public RCTTorchModuleOld(ReactApplicationContext reactContext) {
     super(reactContext);
 
     this.reactContext = reactContext;
