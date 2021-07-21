@@ -17,7 +17,7 @@ public class RCTTorchPackage implements ReactPackage {
     List<NativeModule> modules = new ArrayList<NativeModule>();
 
     // adding the module to the NativeModule list
-    modules.add(new RCTTorchModule(reactContext));
+    modules.add(new RCTTorchModuleOld(reactContext));
 
     return modules;
   }
