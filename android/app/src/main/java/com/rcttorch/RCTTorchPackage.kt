@@ -1,21 +1,21 @@
 package com.rcttorch
 
-import android.view.View
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.uimanager.ReactShadowNode
 import com.facebook.react.uimanager.ViewManager
+import java.util.*
 
 class RCTTorchPackage : ReactPackage {
 
-  override fun createViewManagers(reactContext: ReactApplicationContext): MutableList<ViewManager<View, ReactShadowNode<*>>> {
-    return mutableListOf(
-      RCTTorchView()
-    )
+  override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
+    val modules = ArrayList<NativeModule>()
+    modules.add(RCTTorchModule(reactContext))
+
+    return modules
   }
 
-  override fun createNativeModules(reactContext: ReactApplicationContext): MutableList<NativeModule> {
-    return mutableListOf()
+  override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
+    return Collections.emptyList<ViewManager<*, *>>()
   }
 }

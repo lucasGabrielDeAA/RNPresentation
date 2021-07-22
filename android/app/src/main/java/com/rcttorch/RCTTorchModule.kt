@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.hardware.Camera
 import android.hardware.camera2.CameraManager
 import android.os.Build
+import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
@@ -44,7 +45,18 @@ class RCTTorchModule(reactContext: ReactApplicationContext): ReactContextBaseJav
           }
         }
     } catch (e: Exception) {
+      e.printStackTrace()
+    }
+  }
 
+  @ReactMethod
+  fun hasFlashLight(promise: Promise) {
+    try {
+      val isFlashLightAvailable: Boolean = this.reactContext.applicationContext.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)
+
+      promise.resolve(isFlashLightAvailable)
+    } catch (e: Exception) {
+      promise.reject(HAS_FLASH_LIGHT_ERROR, e)
     }
   }
 }
